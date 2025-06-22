@@ -3,6 +3,7 @@
   import { useI18n } from 'vue-i18n'
   //import router from vue router
   import { useRouter } from 'vue-router'
+  import ButtonComponent from '@/components/ButtonComponent.vue'
 
   const uiStore = useUIStore()
 
@@ -27,13 +28,7 @@
         {{ t('welcome.subtitle') }}
       </p>
 
-      <button
-        class="custom-button bg-light-carmine dark:bg-dark-scarlet hover:bg-light-scarlet dark:hover:bg-dark-carmine text-white dark:text-white"
-        type="button"
-        @click="redirectToHome"
-      >
-        {{ t('welcome.getStarted') }}
-      </button>
+      <ButtonComponent type="primary" @click="redirectToHome" :label="t('welcome.getStarted')" />
     </div>
   </section>
 </template>

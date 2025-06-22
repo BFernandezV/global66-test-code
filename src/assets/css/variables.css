@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;0,400;0,700&display=swap');
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -26,4 +27,14 @@
   --color-dark-green-white: hsla(0, 0%, 85%, 1);
   --color-dark-smoke-white: hsla(0, 0%, 92%, 1);
   --color-dark-background: hsla(0, 0%, 10%, 1);
+}
+
+:root {
+  --color-unselected-button: var(--color-light-pale-grey);
+  --color-unselected-button-hover: var(--color-light-carbon-grey);
+}
+
+html.dark {
+  --color-unselected-button: var(--color-dark-pale-grey);
+  --color-unselected-button-hover: var(--color-dark-carbon-grey);
 }

@@ -1,7 +1,22 @@
 {
+    "common": {
+        "all": "Todos",
+        "favorites": "Favoritos",
+        "goBackHome": "Volver a casa",
+        "error": "Ocurrió un error. Por favor, inténtalo de nuevo más tarde.",
+        "search": "Buscar"
+    },
     "welcome": {
         "title": "Bienvenido a la Pokédex",
         "subtitle": "La enciclopedia digital creada por el Profesor Oak es una herramienta inestimable para los entrenadores del mundo Pokémon.",
         "getStarted": "Comenzar"
+    },
+    "pokedex": {
+        "title": "Pokédex",
+        "subtitle": "Explora y aprende sobre todos los Pokémon."
+    },
+    "notFound": {
+        "title": "Uh-oh!",
+        "subtitle": "¡Parece que te has perdido en tu viaje!"
     }
 }

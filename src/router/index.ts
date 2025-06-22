@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-
-const REDIRECT_PATH = '/welcome'
+import HomeView from '../views/PokedexView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,20 +11,15 @@ const router = createRouter({
     },
     {
       path: '/welcome',
-      name: 'about',
+      name: 'welcome',
       component: () => import('../views/WelcomeView.vue'),
     },
+    // {
+    //   path: '/',
+    //   name: 'welcome',
+    //   component: () => import('../views/WelcomeView.vue'),
+    // },
   ],
-})
-
-router.beforeEach((to, from, next) => {
-  const { path } = to
-
-  if (path === '/') {
-    return next(REDIRECT_PATH)
-  }
-
-  next()
 })
 
 export default router

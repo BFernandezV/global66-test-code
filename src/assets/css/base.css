@@ -3,28 +3,18 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
+
+  font-family: 'Lato', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.custom-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  border-radius: 2rem;
-  width: fit-content;
-  font-size: 1rem;
-  font-weight: 700;
-  text-decoration: none;
-  cursor: pointer;
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
 }
 
-.custom-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-.custom-button:focus {
-  outline: none;
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }

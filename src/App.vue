@@ -2,6 +2,7 @@
   import { computed } from 'vue'
   import { RouterView } from 'vue-router'
   import { useUIStore } from './stores/ui'
+  import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
   import NavbarComponent from '@/components/NavbarComponent.vue'
   import LoaderComponent from '@/components/LoaderComponent.vue'
 
@@ -12,9 +13,21 @@
 
 <template>
   <main class="bg-light-background dark:bg-dark-background h-full">
-    <NavbarComponent />
-    <RouterView />
-    <LoaderComponent v-if="isLoading" />
+    <Transition name="fade">
+      <NavbarComponent />
+    </Transition>
+
+    <RouterView v-slot="{ Component }">
+      <transition name="fade">
+        <component :is="Component" />
+      </transition>
+    </RouterView>
+
+    <Transition name="fade">
+      <LoaderComponent v-if="isLoading" />
+    </Transition>
+
+    <VueQueryDevtools />
   </main>
 </template>
 
