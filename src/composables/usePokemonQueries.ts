@@ -15,7 +15,7 @@ export function usePokemonListQuery() {
     queryKey: ['pokemonList'],
     initialPageParam: 0,
     queryFn: async ({ pageParam = 0 }) => {
-      const limit = 100
+      const limit = 300
       const data = await fetchPokemonList({ limit, offset: pageParam })
       return {
         results: data.results.map(pokemon => ({ name: capitalizeFirstLetter(pokemon.name) })),
