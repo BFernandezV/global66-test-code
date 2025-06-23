@@ -90,13 +90,13 @@ Para gestionar el estado de los Pokémon marcados como favoritos, se utilizó **
 
 * **Centralización**: Un único lugar para la lógica y el estado de los favoritos.
 * **Reactividad**: Cualquier cambio en el listado de favoritos se refleja automáticamente en la interfaz de usuario.
-* **Persistencia**: Mediante la integración de `localStorage` (o una librería que lo maneje), se asegura que la lista de favoritos se mantenga incluso después de que el usuario cierre y vuelva a abrir la aplicación o el navegador. Esto es crucial para una experiencia de usuario consistente.
+* **Persistencia**: Mediante la integración de `localStorage`, se asegura que la lista de favoritos se mantenga incluso después de que el usuario cierre y vuelva a abrir la aplicación o el navegador. Esto es crucial para una experiencia de usuario consistente.
 
-**Funcionalidades Clave:**
+### Funcionalidades Adicionales
 
-* **Añadir/Eliminar de favoritos**: Interacción sencilla desde la vista de detalle de cada Pokémon o desde las tarjetas del listado principal.
-* **Visualización de favoritos**: Una sección dedicada que muestra solo los Pokémon que el usuario ha guardado.
-* **Manejo de duplicados**: Lógica implementada para evitar que un mismo Pokémon sea añadido múltiples veces a la lista.
+* **Modo Oscuro**: Implementé soporte para modo oscuro porque personalmente disfruto las interfaces en este estilo, y además mejora la experiencia en entornos con poca luz.  
+* **Internacionalización (i18n)**: Incorporé Ingles e Español, ya que considero fundamental que una aplicación sea accesible para usuarios de distintas regiones.  
+* **Playwright (Testing E2E)**: Elegí Playwright para realizar pruebas end-to-end en flujos críticos. Por motivos de tiempo, solo implementé una prueba como ejemplo.
 
 ## Configuración del proyecto
 
