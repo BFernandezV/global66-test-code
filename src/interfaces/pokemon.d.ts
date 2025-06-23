@@ -1,3 +1,15 @@
+export interface PokemonInfiniteQuery {
+  results: PokemonListItem[]
+  nextOffset: number
+  hasMore: boolean
+}
+
+export interface PokemonDescriptionInfo {
+  name: keyof Pokemon
+  label: string
+  format?: (value: TData) => string
+}
+
 export interface PokemonResponseList {
   count: number
   next: string | null
@@ -7,18 +19,15 @@ export interface PokemonResponseList {
 
 export interface PokemonListItem {
   name: string
-  url: string
-  favorite: boolean
 }
 
 export interface Pokemon {
-  id: number
-  name: string
-  height: number
-  weight: number
+  id: number | null
+  name: string | null
+  height: number | null
+  weight: number | null
   types: Type[]
-  image: string
-  favorite: boolean
+  image?: string
 }
 
 export interface PokemonResponse {
@@ -121,7 +130,7 @@ interface Versions {
 interface Other {
   dreamWorld: DreamWorld
   home: Home
-  officialArtwork: OfficialArtwork
+  'official-artwork': OfficialArtwork
   showdown: Sprites
 }
 
@@ -185,7 +194,7 @@ interface GenerationIii {
 }
 
 interface OfficialArtwork {
-  frontDefault: string
+  front_default: string
   frontShiny: string
 }
 
@@ -216,7 +225,7 @@ interface Stat {
   stat: Species
 }
 
-interface Type {
+export interface Type {
   slot: number
   type: Species
 }

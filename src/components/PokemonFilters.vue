@@ -7,7 +7,9 @@
 
   const { t } = useI18n()
 
-  const emit = defineEmits(['allPokemons', 'favoritePokemons'])
+  const emit = defineEmits<{
+    (e: 'setFilterType', type: FilterType): void
+  }>()
 
   defineProps<{
     selectedFilterType: string
@@ -21,7 +23,7 @@
     <ButtonComponent
       type="primary"
       class-name="w-[150px] lg:w-[275px]"
-      @click="emit('allPokemons')"
+      @click="emit('setFilterType', FilterType.ALL)"
       :label="t('common.all')"
       :selected="selectedFilterType === FilterType.ALL"
     >
@@ -31,7 +33,7 @@
       type="primary"
       :label="t('common.favorites')"
       class-name="w-[150px] lg:w-[275px]"
-      @click="emit('favoritePokemons')"
+      @click="emit('setFilterType', FilterType.FAVORITE)"
       :selected="selectedFilterType === FilterType.FAVORITE"
     >
       <template #icon> <IconStar class="me-2 h-[18px] w-[18px]" /> </template

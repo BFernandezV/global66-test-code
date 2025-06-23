@@ -5,10 +5,13 @@
   import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
   import NavbarComponent from '@/components/NavbarComponent.vue'
   import LoaderComponent from '@/components/LoaderComponent.vue'
+  import { useFavoritesStore } from './stores/favorites'
 
   const uiStore = useUIStore()
+  const favoritesStore = useFavoritesStore()
 
   const isLoading = computed(() => uiStore.loading)
+  favoritesStore.init()
 </script>
 
 <template>

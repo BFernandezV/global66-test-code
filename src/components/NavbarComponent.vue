@@ -1,8 +1,9 @@
 <script setup lang="ts">
-  import { useUIStore } from '@/stores/ui'
-  import { Icon } from '@iconify/vue'
-  import { useDark, useToggle } from '@vueuse/core'
   import { computed } from 'vue'
+  import Popper from 'vue3-popper'
+  import { Icon } from '@iconify/vue'
+  import { useUIStore } from '@/stores/ui'
+  import { useDark, useToggle } from '@vueuse/core'
 
   const uiStore = useUIStore()
 
@@ -23,12 +24,18 @@
     class="bg-light-background dark:bg-dark-background absolute top-0 right-0 z-10 flex items-center justify-between p-2"
   >
     <nav class="flex justify-end gap-2">
-      <button type="button" class="bg-light-blue dark:bg-light-green-white rounded-md p-1">
-        <Icon
-          icon="lucide:languages"
-          class="dark:text-dark-carbon-grey text-blue text-2xl text-indigo-200"
-        />
-      </button>
+      <Popper>
+        <button type="button" class="bg-light-blue dark:bg-light-green-white rounded-md p-1">
+          <Icon
+            icon="lucide:languages"
+            class="dark:text-dark-carbon-grey text-blue text-2xl text-indigo-200"
+          />
+        </button>
+        <template #content>
+          <div>This is the Popper content</div>
+        </template>
+      </Popper>
+
       <button
         type="button"
         class="bg-light-blue dark:bg-light-green-white rounded-md p-1"

@@ -6,8 +6,13 @@
   import PokemonList from '@/components/PokemonList.vue'
   import PokemonFilters from '@/components/PokemonFilters.vue'
   import { usePokemonListQuery } from '@/composables/usePokemonQueries'
+  import type { PokemonListItem } from '@/interfaces/pokemon'
+  import { useFavoritesStore } from '@/stores/favorites'
+  import { fetchPokemonByName } from '@/api/pokemon'
+  import { capitalizeFirstLetter } from '@/utils/string.utils'
 
   const uiStore = useUIStore()
+  const favoritesStore = useFavoritesStore()
 
   uiStore.loading = true
 
@@ -16,9 +21,29 @@
 
   const selectedFilterType = ref(FilterType.ALL)
 
-  const pokemonList = computed(() => {
+  const searchTerm = ref('')
+
+  const searchBar = ref<InstanceType<typeof SearchBar> | null>(null)
+
+  const filteredPokemonList = ref<PokemonListItem[]>([])
+
+  const allPokemons = computed<PokemonListItem[]>(() => {
     return data.value?.pages.flatMap(page => page.results) || []
   })
+
+  watch(
+    [selectedFilterType, searchTerm, allPokemons],
+    async () => {
+      if (selectedFilterType.value === FilterType.FAVORITE) {
+        filteredPokemonList.value = favoritesStore.getFavoritePokemons()
+      } else if (selectedFilterType.value === FilterType.SEARCH) {
+        filteredPokemonList.value = await searchPokemon()
+      } else {
+        filteredPokemonList.value = allPokemons.value
+      }
+    },
+    { immediate: true },
+  )
 
   watch(isLoading, (newValue: boolean) => {
     if (!newValue) {
@@ -34,34 +59,55 @@
     }
   })
 
-  const filterFavoritePokemons = () => {
-    selectedFilterType.value = FilterType.FAVORITE
-    console.log('Filter favorite pokemons')
+  const searchPokemon = async (): Promise<PokemonListItem[]> => {
+    const search = searchTerm.value.toLowerCase()
+    const results = new Set<string>()
+
+    try {
+      const result = await fetchPokemonByName(searchTerm.value)
+      results.add(capitalizeFirstLetter(result.name))
+    } catch (error) {
+      console.warn('Error in searchPokemon:', error)
+    }
+
+    const partialMatches = allPokemons.value.filter(pokemon =>
+      pokemon.name.toLowerCase().includes(search),
+    )
+
+    partialMatches.forEach(pokemon => results.add(pokemon.name))
+
+    const resultsArray = Array.from(results)
+
+    return resultsArray.map(name => {
+      return {
+        name,
+      }
+    })
   }
 
-  const getAllPokemons = () => {
-    selectedFilterType.value = FilterType.ALL
-    console.log('Get all pokemons')
+  const setFilterType = (filterType: FilterType) => {
+    selectedFilterType.value = filterType
+
+    if (filterType === FilterType.ALL) {
+      searchTerm.value = ''
+      searchBar.value?.clearInput()
+    }
   }
 </script>
 
 <template>
   <section class="flex h-screen flex-col items-center justify-center">
-    <div class="flex w-4/5 grow flex-col items-center justify-center md:w-2/3">
-      <SearchBar />
+    <div class="flex w-4/5 grow flex-col items-center justify-center gap-5 md:w-2/3">
+      <SearchBar ref="searchBar" v-model:searchTerm="searchTerm" @setFilterType="setFilterType" />
       <PokemonList
-        :pokemon-list="pokemonList"
+        :pokemon-list="filteredPokemonList"
         :loading="isFetchingNextPage"
         :has-next-page="hasNextPage"
-        class="grow"
         @loadMore="fetchNextPage"
+        @setFilterType="setFilterType"
       />
     </div>
 
-    <PokemonFilters
-      :selectedFilterType="selectedFilterType"
-      @allPokemons="getAllPokemons"
-      @favoritePokemons="filterFavoritePokemons"
-    />
+    <PokemonFilters :selectedFilterType="selectedFilterType" @setFilterType="setFilterType" />
   </section>
 </template>

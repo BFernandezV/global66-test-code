@@ -20,7 +20,7 @@
   <section class="flex h-screen flex-col items-center justify-center gap-20">
     <img class="ml-7" src="@/assets/images/pikachu.webp" alt="pikachu_logo" />
 
-    <div class="flex w-80 flex-col items-center justify-center gap-4 text-center">
+    <div class="flex w-80 flex-col items-center justify-center gap-6 text-center md:w-1/3">
       <h1 class="text-light-dark-grey text-3xl font-bold dark:text-white">
         {{ t('welcome.title') }}
       </h1>
@@ -28,7 +28,12 @@
         {{ t('welcome.subtitle') }}
       </p>
 
-      <ButtonComponent type="primary" @click="redirectToHome" :label="t('welcome.getStarted')" />
+      <ButtonComponent
+        type="primary"
+        class-name="mt-4"
+        @click="redirectToHome"
+        :label="t('welcome.getStarted')"
+      />
     </div>
   </section>
 </template>

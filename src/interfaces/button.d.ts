@@ -1,10 +1,10 @@
-type ButtonType = 'primary' | 'unselected'
+type ButtonType = 'primary' | 'icon' | 'unselected'
 
 export interface ButtonProps {
   /**
    * Button label
    */
-  label: string
+  label?: string
 
   /**
    * Button type, e.g., 'primary'.

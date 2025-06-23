@@ -11,6 +11,13 @@
         "subtitle": "La enciclopedia digital creada por el Profesor Oak es una herramienta inestimable para los entrenadores del mundo Pokémon.",
         "getStarted": "Comenzar"
     },
+    "pokemonDetails": {
+        "name": "Nombre",
+        "height": "Altura",
+        "weight": "Peso",
+        "types": "Tipos",
+        "shareWithFriends": "Compartir con mis amigos"
+    },
     "pokedex": {
         "title": "Pokédex",
         "subtitle": "Explora y aprende sobre todos los Pokémon."

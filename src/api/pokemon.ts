@@ -1,5 +1,5 @@
 import pokemonApi from '@/plugins/axios'
-import type { PokemonResponseList } from '@/interfaces/pokemon'
+import type { PokemonResponse, PokemonResponseList } from '@/interfaces/pokemon'
 
 /**
  * Get Pokémon list from the API.
@@ -17,6 +17,20 @@ export const fetchPokemonList = async ({
 }): Promise<PokemonResponseList> => {
   try {
     const response = await pokemonApi.get(`/pokemon?limit=${limit}&offset=${offset}`)
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}
+
+/**
+ * Get Pokémon details by name .
+ * @param {string} name - Pokémon name.
+ * @return {Promise<PokemonResponse>} - Promise resolving to the Pokémon details.
+ */
+export const fetchPokemonByName = async (name: string): Promise<PokemonResponse> => {
+  try {
+    const response = await pokemonApi.get(`/pokemon/${name}`)
     return response.data
   } catch (error) {
     throw error
