@@ -1,5 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/PokedexView.vue'
+import i18n from '@/plugins/i18n'
+import { createRouter, createWebHistory } from 'vue-router'
+
+const { t } = i18n.global
 
 const REDIRECT_ROUTE = '/welcome'
 
@@ -19,7 +22,9 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
+  document.title = to.name === 'home' ? t('pokedex.title') : t('welcome.title')
+
   if (to.path === '/') {
     next(REDIRECT_ROUTE)
   } else {

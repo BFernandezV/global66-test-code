@@ -6,6 +6,7 @@ export const useFavoritesStore = defineStore('favorites', () => {
   const favoritePokemonNames = ref<string[]>([])
 
   const init = () => {
+    if (favoritePokemonNames.value.length > 0) return
     const storedFavorites = localStorage.getItem('favoritePokemonNames')
     if (storedFavorites) {
       const parsedFavorites = JSON.parse(storedFavorites)
@@ -56,5 +57,7 @@ export const useFavoritesStore = defineStore('favorites', () => {
     isFavorite,
     getRichPokemons,
     getFavoritePokemons,
+    addFavorite,
+    removeFavorite,
   }
 })

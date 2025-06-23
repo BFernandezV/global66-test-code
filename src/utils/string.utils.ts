@@ -7,6 +7,14 @@
  */
 
 export const capitalizeFirstLetter = (str: string): string => {
-  if (!str) return str
-  return str.charAt(0).toUpperCase() + str.slice(1)
+  if (typeof str !== 'string') {
+    return str
+  }
+
+  const trimmedStr = str.trim()
+  if (trimmedStr.length === 0) {
+    return ''
+  }
+
+  return trimmedStr.charAt(0).toUpperCase() + trimmedStr.slice(1)
 }
