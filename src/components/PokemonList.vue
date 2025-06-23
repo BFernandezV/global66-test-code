@@ -8,10 +8,11 @@
   import type { PokemonListItem } from '@/interfaces/pokemon'
   import ButtonComponent from '@/components/ButtonComponent.vue'
 
-  defineProps<{
+  const props = defineProps<{
     pokemonList: PokemonListItem[] | null
     loading?: boolean
     hasNextPage?: boolean
+    selectedFilterType: FilterType
   }>()
   const emit = defineEmits<{
     (e: 'loadMore'): void
@@ -28,6 +29,12 @@
     selectedPokemonName.value = pokemonName
     openDetails.value = true
   }
+
+  const handleScrollEnd = () => {
+    if (props.hasNextPage && props.selectedFilterType !== FilterType.SEARCH) {
+      emit('loadMore')
+    }
+  }
 </script>
 
 <template>
@@ -40,7 +47,7 @@
       :item-size="72"
       key-field="name"
       v-slot="{ item }"
-      @scroll-end="emit('loadMore')"
+      @scroll-end="handleScrollEnd"
     >
       <PokemonItem :pokemon="item" @openPokemonDetails="openPokemonDetails" />
     </RecycleScroller>

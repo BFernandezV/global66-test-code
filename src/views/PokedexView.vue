@@ -129,6 +129,7 @@
           :pokemon-list="filteredPokemonList"
           :loading="isFetchingNextPage"
           :has-next-page="hasNextPage"
+          :selected-filter-type="selectedFilterType"
           @loadMore="fetchNextPage"
           @setFilterType="setFilterType"
         />
