@@ -1,9 +1,9 @@
 <script setup lang="ts">
-  import { useI18n } from 'vue-i18n'
-  import IconSearch from './icons/IconSearch.vue'
-  import { useDebounceFn } from '@vueuse/core'
   import { ref } from 'vue'
+  import { useI18n } from 'vue-i18n'
+  import { useDebounceFn } from '@vueuse/core'
   import { FilterType } from '@/enums/filters'
+  import IconSearch from './icons/IconSearch.vue'
 
   const { t } = useI18n()
 

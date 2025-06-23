@@ -1,15 +1,17 @@
 <script setup lang="ts">
-  import { computed, ref, watch } from 'vue'
   import { useI18n } from 'vue-i18n'
+  import { toast } from 'vue3-toastify'
+  import { useDark } from '@vueuse/core'
+  import { computed, ref, watch } from 'vue'
   import IconClose from './icons/IconClose.vue'
   import IconFavActive from './icons/IconFavActive.vue'
   import { useFavoritesStore } from '@/stores/favorites'
   import IconFavDisabled from './icons/IconFavDisabled.vue'
+  import { capitalizeFirstLetter } from '@/utils/string.utils'
   import ButtonComponent from '@/components/ButtonComponent.vue'
   import PokemonBackground from '@/assets/images/pokemonBackground.webp'
-  import type { Pokemon, PokemonDescriptionInfo, Type } from '@/interfaces/pokemon'
   import { usePokemonDetailsQuery } from '@/composables/usePokemonQueries'
-  import { capitalizeFirstLetter } from '@/utils/string.utils'
+  import type { Pokemon, PokemonDescriptionInfo, Type } from '@/interfaces/pokemon'
 
   const props = defineProps<{
     open: boolean
@@ -41,6 +43,8 @@
   const emit = defineEmits<{
     (e: 'update:open', open: boolean): void
   }>()
+
+  const isDark = useDark()
 
   const isImageLoaded = ref(false)
 
@@ -99,10 +103,18 @@
     navigator.clipboard
       .writeText(copyText)
       .then(() => {
-        console.log('Pokemon data copied to clipboard!')
+        toast(t('pokemonDetails.successCopy'), {
+          theme: isDark.value ? 'dark' : 'light',
+          type: 'info',
+          autoClose: 1000,
+        })
       })
-      .catch(err => {
-        console.error('Failed to copy: ', err)
+      .catch(() => {
+        toast(t('pokemonDetails.errorCopy'), {
+          theme: isDark.value ? 'dark' : 'light',
+          type: 'error',
+          autoClose: 1000,
+        })
       })
   }
 
@@ -120,6 +132,19 @@
     newValue => {
       if (!newValue) {
         cleanData()
+      }
+    },
+  )
+
+  watch(
+    () => isError.value,
+    newValue => {
+      if (newValue) {
+        toast(t('pokemonDetails.errorFetch'), {
+          theme: isDark.value ? 'dark' : 'light',
+          type: 'error',
+          autoClose: 1000,
+        })
       }
     },
   )
@@ -187,10 +212,10 @@
 
               <hr class="bg-light-green-white h-[1px] w-full border-t-0 dark:bg-white/10" />
             </div>
-            <footer class="mt-3 flex items-center justify-between">
+            <footer class="mt-3 flex grow items-center justify-between">
               <ButtonComponent
                 type="primary"
-                class-name="w-[195px]"
+                class-name="w-[195px] md:w-[250px] xs:text-xs"
                 @click="copyPokemon"
                 :disabled="!pokemon.name"
                 :label="t('pokemonDetails.shareWithFriends')"

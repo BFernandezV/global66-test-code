@@ -27,6 +27,8 @@
   --color-dark-green-white: hsla(0, 0%, 85%, 1);
   --color-dark-smoke-white: hsla(0, 0%, 92%, 1);
   --color-dark-background: hsla(0, 0%, 10%, 1);
+
+  --font-pokemon-gb: 'Pokemon GB', sans-serif;
 }
 
 :root {

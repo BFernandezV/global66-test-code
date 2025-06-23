@@ -1,4 +1,6 @@
+@import './fonts.css';
 @import './variables.css';
 @import './base.css';
 @import 'tailwindcss';
 @import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
+@import 'vue3-toastify/dist/index.css';

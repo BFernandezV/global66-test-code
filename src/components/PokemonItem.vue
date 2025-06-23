@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import { computed } from 'vue'
-
   import IconFavActive from './icons/IconFavActive.vue'
   import { useFavoritesStore } from '@/stores/favorites'
   import IconFavDisabled from './icons/IconFavDisabled.vue'

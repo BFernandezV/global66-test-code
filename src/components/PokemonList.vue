@@ -47,7 +47,7 @@
 
     <div
       v-if="!pokemonList || pokemonList.length === 0"
-      class="mt-6 flex w-full flex-col items-center justify-center"
+      class="mt-6 flex w-full flex-col items-center justify-center text-center"
     >
       <h3 class="text-light-dark-grey text-4xl font-bold dark:text-white">
         {{ t('notFound.title') }}
@@ -70,7 +70,7 @@
 
 <style>
   .scroller {
-    height: calc(100vh - 170px);
+    height: calc(100vh - 212px);
     overflow: auto;
 
     scrollbar-width: none;

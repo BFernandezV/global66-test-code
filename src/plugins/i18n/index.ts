@@ -8,8 +8,12 @@ const messages = {
   en,
 }
 
+const browserLocale = navigator.language
+const storedLocale = localStorage.getItem('locale')
+const locale = storedLocale || browserLocale.split('-')[0] || 'en'
+
 const i18n = createI18n({
-  locale: 'es',
+  locale: locale,
   fallbackLocale: 'es',
   legacy: false,
   messages,

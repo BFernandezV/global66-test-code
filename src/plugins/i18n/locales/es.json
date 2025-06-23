@@ -1,29 +1,36 @@
 {
-    "common": {
-        "all": "Todos",
-        "favorites": "Favoritos",
-        "goBackHome": "Volver a casa",
-        "error": "Ocurrió un error. Por favor, inténtalo de nuevo más tarde.",
-        "search": "Buscar"
-    },
-    "welcome": {
-        "title": "Bienvenido a la Pokédex",
-        "subtitle": "La enciclopedia digital creada por el Profesor Oak es una herramienta inestimable para los entrenadores del mundo Pokémon.",
-        "getStarted": "Comenzar"
-    },
-    "pokemonDetails": {
-        "name": "Nombre",
-        "height": "Altura",
-        "weight": "Peso",
-        "types": "Tipos",
-        "shareWithFriends": "Compartir con mis amigos"
-    },
-    "pokedex": {
-        "title": "Pokédex",
-        "subtitle": "Explora y aprende sobre todos los Pokémon."
-    },
-    "notFound": {
-        "title": "Uh-oh!",
-        "subtitle": "¡Parece que te has perdido en tu viaje!"
-    }
+  "common": {
+    "all": "Todos",
+    "favorites": "Favoritos",
+    "goBackHome": "Volver a casa",
+    "error": "Ocurrió un error. Por favor, inténtalo de nuevo más tarde.",
+    "search": "Buscar"
+  },
+  "pokemon": {
+    "pokemon": "Pokémon | Pokémons"
+  },
+  "welcome": {
+    "title": "Bienvenido a la Pokédex",
+    "subtitle": "La enciclopedia digital creada por el Profesor Oak es una herramienta inestimable para los entrenadores del mundo @:pokemon.pokemon",
+    "getStarted": "Comenzar"
+  },
+  "pokemonDetails": {
+    "name": "Nombre",
+    "height": "Altura",
+    "weight": "Peso",
+    "types": "Tipos",
+    "shareWithFriends": "Compartir con mis amigos",
+    "successCopy": "@:pokemon.pokemon copiado al portapapeles",
+    "errorCopy": "Error al copiar @:pokemon.pokemon al portapapeles",
+    "errorFetch": "Error al obtener los datos del @:pokemon.pokemon. Por favor, inténtalo de nuevo más tarde."
+  },
+  "pokedex": {
+    "title": "Pokédex",
+    "subtitle": "Explora y aprende sobre todos los Pokémon.",
+    "errorFetch": "Error al obtener los datos de la @:pokedex.pokedex . Por favor, inténtalo de nuevo más tarde."
+  },
+  "notFound": {
+    "title": "Uh-oh!",
+    "subtitle": "¡Parece que te has perdido en tu viaje!"
+  }
 }

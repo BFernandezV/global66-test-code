@@ -11,7 +11,7 @@
       'bg-light-carmine dark:bg-dark-scarlet hover:bg-light-scarlet dark:hover:bg-dark-carmine text-white dark:text-white flex items-center',
     unselected:
       'bg-light-pale-grey dark:bg-dark-pale-grey hover:bg-light-carbon-grey dark:hover:bg-dark-grey text-white flex items-center',
-    icon: 'flex items-center justify-center',
+    icon: 'flex items-center justify-center w-[50px] h-[30px]',
   }
 
   const className = computed(() => {

@@ -1,23 +1,21 @@
 <script setup lang="ts">
-  import { useUIStore } from '@/stores/ui'
   import { useI18n } from 'vue-i18n'
-  //import router from vue router
   import { useRouter } from 'vue-router'
   import ButtonComponent from '@/components/ButtonComponent.vue'
-
-  const uiStore = useUIStore()
 
   const router = useRouter()
   const { t } = useI18n()
 
   const redirectToHome = () => {
-    uiStore.loading = true
     router.push({ name: 'home' })
   }
 </script>
 
 <template>
-  <section class="flex h-screen flex-col items-center justify-center gap-20">
+  <section
+    class="flex flex-col items-center justify-center gap-20"
+    style="height: calc(100vh - 42px)"
+  >
     <img class="ml-7" src="@/assets/images/pikachu.webp" alt="pikachu_logo" />
 
     <div class="flex w-80 flex-col items-center justify-center gap-6 text-center md:w-1/3">

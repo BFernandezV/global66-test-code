@@ -1,13 +1,12 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import Popper from 'vue3-popper'
+  import { useI18n } from 'vue-i18n'
   import { Icon } from '@iconify/vue'
-  import { useUIStore } from '@/stores/ui'
   import { useDark, useToggle } from '@vueuse/core'
+  import ButtonComponent from '@/components/ButtonComponent.vue'
 
-  const uiStore = useUIStore()
-
-  const isLoading = computed(() => uiStore.loading)
+  const i18n = useI18n()
 
   const isDark = useDark()
   const toggleDark = useToggle(isDark)
@@ -16,36 +15,62 @@
     toggleDark()
     localStorage.setItem('darkMode', isDark.value ? 'true' : 'false')
   }
+
+  const availableLocales = computed(() => i18n.availableLocales)
+  const currentLocale = computed(() => i18n.locale.value)
+
+  const setLocale = (locale: string) => {
+    i18n.locale.value = locale
+    localStorage.setItem('locale', locale)
+  }
 </script>
 
 <template>
   <header
-    v-if="!isLoading"
-    class="bg-light-background dark:bg-dark-background absolute top-0 right-0 z-10 flex items-center justify-between p-2"
+    class="bg-light-background dark:bg-dark-background flex items-center justify-end px-2 pt-2"
   >
     <nav class="flex justify-end gap-2">
       <Popper>
-        <button type="button" class="bg-light-blue dark:bg-light-green-white rounded-md p-1">
-          <Icon
-            icon="lucide:languages"
-            class="dark:text-dark-carbon-grey text-blue text-2xl text-indigo-200"
-          />
-        </button>
+        <ButtonComponent type="icon" class-name="bg-light-blue hover:bg-dark-blue">
+          <template #icon>
+            <Icon
+              icon="lucide:languages"
+              class="text-blue text-2xl text-indigo-200 dark:text-white"
+            />
+          </template>
+        </ButtonComponent>
         <template #content>
-          <div>This is the Popper content</div>
+          <section
+            class="dark:bg-dark-carbon-grey dark:border-dark-pale-grey font-pokemon-gb w-[100px] rounded-md border-1 border-solid bg-white p-2 shadow-md dark:text-white"
+          >
+            <ul class="gap-2 text-center">
+              <li
+                v-for="locale in availableLocales"
+                :key="locale"
+                class="flex cursor-pointer hover:text-blue-500"
+                @click="setLocale(locale)"
+              >
+                <span v-show="locale === currentLocale">▶</span>
+                <span class="grow">{{ locale.trim() }}</span>
+                <span v-show="locale === currentLocale" class="opacity-0">▶</span>
+              </li>
+            </ul>
+          </section>
         </template>
       </Popper>
 
-      <button
-        type="button"
-        class="bg-light-blue dark:bg-light-green-white rounded-md p-1"
+      <ButtonComponent
+        type="icon"
+        class-name="bg-light-blue hover:bg-dark-blue"
         @click="togglePageMode"
       >
-        <Icon
-          :icon="isDark ? 'lucide:sun' : 'lucide:moon'"
-          class="dark:text-dark-carbon-grey text-2xl text-indigo-200"
-        />
-      </button>
+        <template #icon>
+          <Icon
+            :icon="isDark ? 'lucide:sun' : 'lucide:moon'"
+            class="text-2xl text-indigo-200 dark:text-white"
+          />
+        </template>
+      </ButtonComponent>
     </nav>
   </header>
 </template>
