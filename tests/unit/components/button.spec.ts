@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import ButtonComponent from '../../src/components/ButtonComponent.vue'
+import ButtonComponent from '../../../src/components/ButtonComponent.vue'
 
 describe('ButtonComponent', () => {
   it('should apply primary classes when type is primary and selected is true', () => {
