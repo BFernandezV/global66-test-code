@@ -42,12 +42,7 @@
   })
 
   watch(
-    [
-      selectedFilterType,
-      searchTerm,
-      allPokemons,
-      computed(() => favoritesStore.getFavoritePokemons()),
-    ],
+    [selectedFilterType, searchTerm, allPokemons],
     async () => {
       if (selectedFilterType.value === FilterType.FAVORITE) {
         filteredPokemonList.value = favoritesStore.getFavoritePokemons()
@@ -55,6 +50,16 @@
         filteredPokemonList.value = await searchPokemon()
       } else {
         filteredPokemonList.value = allPokemons.value
+      }
+    },
+    { immediate: true },
+  )
+
+  watch(
+    [computed(() => favoritesStore.getFavoritePokemons())],
+    async () => {
+      if (selectedFilterType.value === FilterType.FAVORITE) {
+        filteredPokemonList.value = favoritesStore.getFavoritePokemons()
       }
     },
     { immediate: true },
@@ -140,7 +145,8 @@
         <PokemonFilters
           v-if="
             selectedFilterType !== FilterType.SEARCH ||
-            (selectedFilterType === FilterType.SEARCH && loadingSearch)
+            loadingSearch ||
+            filteredPokemonList.length > 0
           "
           :selectedFilterType="selectedFilterType"
           @setFilterType="setFilterType"
